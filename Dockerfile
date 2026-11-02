@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # Multi-stage, non-root image built with uv (https://docs.astral.sh/uv/guides/integration/docker/).
 
-FROM python:3.14-slim AS build
+FROM python:3.15-slim AS build
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
   uv sync --frozen --no-dev --no-editable
 
-FROM python:3.14-slim
+FROM python:3.15-slim
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 # Fixed numeric uid/gid: stable file ownership across rebuilds and bind mounts, and
